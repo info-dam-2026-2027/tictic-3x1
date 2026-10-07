@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tictic_info/styles/colors.dart';
 
+import '../styles/sizes.dart';
+import '../styles/texts.dart';
+
 class MyTextInput extends StatelessWidget {
   const MyTextInput({
     super.key,
@@ -22,16 +25,34 @@ class MyTextInput extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(
-          color: kBlack,
-          fontSize: 24,
-          fontFamily: 'Poppins',
-        ),
+        labelStyle: kTextInputLabel,
         hintText: placeholder,
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(0)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(kTextInputBorderRadius)),
+        filled: true,
+        fillColor: kWhite,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(kTextInputBorderRadius),
+          borderSide: const BorderSide(
+            color: kGrey,
+            width: kBorderInputWidth,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(kTextInputBorderRadius),
+          borderSide: const BorderSide(
+            color: kDarkGreen,
+            width: kBorderInputWidth,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(kTextInputBorderRadius),
+          borderSide: const BorderSide(
+            color: kRed,
+            width: kBorderInputWidth,
+          ),
+        ),
       ),
-      //validator: ,
     );
   }
 }

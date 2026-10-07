@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tictic_info/styles/colors.dart';
+import 'package:tictic_info/styles/sizes.dart';
+
+import '../styles/texts.dart';
+import '../validators/validators.dart';
 
 class MyPasswordInput extends StatefulWidget {
   const MyPasswordInput({super.key, required this.passwordController});
@@ -20,14 +24,10 @@ class _MyPasswordInputState extends State<MyPasswordInput> {
       obscureText: passwordNotVisible,
       decoration: InputDecoration(
         labelText: 'Mot de passe *',
-        labelStyle: TextStyle(
-          color: kBlack,
-          fontSize: 24,
-          fontFamily: 'Poppins',
-        ),
+        labelStyle: kTextInputLabel,
         hintText: 'Ex: ***********',
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(0)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(kTextInputBorderRadius)),
         //icon: IconButton(onPressed: () {}, icon: Icon(Icons.visibility)),
         //prefixIcon: IconButton(onPressed: () {}, icon: Icon(Icons.visibility)),
         suffixIcon: IconButton(
@@ -40,8 +40,31 @@ class _MyPasswordInputState extends State<MyPasswordInput> {
             passwordNotVisible ? Icons.visibility : Icons.visibility_off,
           ),
         ),
+          filled: true,
+          fillColor: kWhite,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(kTextInputBorderRadius),
+            borderSide: const BorderSide(
+              color: kGrey,
+              width: kBorderInputWidth,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(kTextInputBorderRadius),
+            borderSide: const BorderSide(
+              color: kDarkGreen,
+              width: kBorderInputWidth,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(kTextInputBorderRadius),
+            borderSide: const BorderSide(
+              color: kRed,
+              width: kBorderInputWidth,
+            ),
+          )
       ),
-      //validator: ,
+      validator: Validators.password,
     );
   }
 }

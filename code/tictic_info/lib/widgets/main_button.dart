@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:tictic_info/styles/colors.dart';
 import 'package:tictic_info/styles/texts.dart';
 
-class NavigatorButton extends StatelessWidget {
+class MainButton extends StatelessWidget {
   final GestureTapCallback onTap;
   final String label;
   final String color;
 
-  const NavigatorButton({
+  const MainButton({
     super.key,
     required this.onTap,
     required this.label,

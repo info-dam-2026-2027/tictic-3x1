@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tictic_info/styles/colors.dart';
+import 'package:tictic_info/screens/home_screen.dart';
+import 'package:tictic_info/screens/login_screen.dart';
+import 'package:tictic_info/screens/register_screen.dart';
+import 'package:tictic_info/styles/paddings.dart';
 import 'package:tictic_info/styles/sizes.dart';
-import 'package:tictic_info/styles/texts.dart';
 import 'package:tictic_info/widgets/carousel.dart';
 
-import '../widgets/navigator_button.dart';
+import '../widgets/logo_application.dart';
+import '../widgets/main_button.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
+
+  static final String routeName = '/';
 
   @override
   Widget build(BuildContext context) {
@@ -30,32 +34,29 @@ class WelcomeScreen extends StatelessWidget {
                   top: kWelcomeLogoPaddingTop,
                   bottom: kWelcomeLogoPaddingBottom,
                 ),
-                child: SvgPicture.asset(
-                  'assets/icons/logo.svg',
-                  width: kWelcomeLogoSize,
-                ),
+                child: LogoApplication(),
               ),
               Carousel(),
-              NavigatorButton(
-                onTap: () => {Navigator.pushNamed(context, '/home')},
+              MainButton(
+                onTap: () => {Navigator.pushNamed(context, HomeScreen.routeName)},
                 label: 'Continuer sans compte',
                 color: 'dark',
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                  vertical: 24.0,
+                  horizontal: kPaddingM,
+                  vertical: kPaddingXL,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    NavigatorButton(
-                      onTap: () => {Navigator.pushNamed(context, '/login')},
+                    MainButton(
+                      onTap: () => {Navigator.pushNamed(context, LoginScreen.routeName)},
                       label: 'Se connecter',
                       color: 'light',
                     ),
-                    NavigatorButton(
-                      onTap: () => {Navigator.pushNamed(context, '/register')},
+                    MainButton(
+                      onTap: () => {Navigator.pushNamed(context, RegisterScreen.routeName)},
                       label: 'S’inscrire',
                       color: 'light',
                     ),
