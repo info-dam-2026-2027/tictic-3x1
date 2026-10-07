@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tictic_info/styles/colors.dart';
-import 'package:tictic_info/styles/texts.dart';
+
+import '../styles/colors.dart';
+import '../styles/paddings.dart';
+import '../styles/sizes.dart';
+import '../styles/texts.dart';
 
 class Carousel extends StatefulWidget {
   const Carousel({super.key});
@@ -11,7 +14,13 @@ class Carousel extends StatefulWidget {
 
 class _CarouselState extends State<Carousel> {
   // Déclarer un tableau
-  final _items = ['Text 1', 'Text 2', 'Text 3', 'Text 4', 'Text 5'];
+  final _items = [
+    'Les bons comptes font les bons amis !',
+    'Partagez les dépenses, pas les soucis.',
+    'Vos dépenses à plusieurs, simplement équilibrées.',
+    'Profitez ensemble, on s’occupe des comptes !',
+    'Moins de calculs, plus de bons moments.'
+  ];
 
   // Déclarer le controller
   final PageController controller = PageController();
@@ -24,12 +33,12 @@ class _CarouselState extends State<Carousel> {
     return Column(
       children: [
         SizedBox(
-          height: 60,
+          height: kCarouselHeight,
           child: PageView.builder(
             controller: controller,
             itemCount: _items.length,
             itemBuilder: (context, i) {
-              return Center(child: Text(_items[i], style: kTitleWelcomePage));
+              return Center(child: Text(_items[i], style: kCarouselText));
             },
             onPageChanged: (i) {
               setState(() {
@@ -39,7 +48,7 @@ class _CarouselState extends State<Carousel> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: kPaddingM),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -54,11 +63,11 @@ class _CarouselState extends State<Carousel> {
                     );
                   },
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(kPaddingXS),
                     child: Container(
-                      height: 5,
+                      height: 3,
                       width:
-                          (MediaQuery.of(context).size.width / _items.length) -
+                      (MediaQuery.of(context).size.width / _items.length) -
                           32,
                       decoration: BoxDecoration(
                         color: _currentIndex == i ? kDarkGreen : kWhite,

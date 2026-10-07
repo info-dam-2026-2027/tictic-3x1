@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tictic_info/screens/home_screen.dart';
-import 'package:tictic_info/screens/login_screen.dart';
 import 'package:tictic_info/screens/register_screen.dart';
-import 'package:tictic_info/styles/paddings.dart';
-import 'package:tictic_info/styles/sizes.dart';
-import 'package:tictic_info/widgets/carousel.dart';
 
+import '../styles/paddings.dart';
+import '../styles/sizes.dart';
+import '../widgets/carousel.dart';
 import '../widgets/logo_application.dart';
 import '../widgets/main_button.dart';
+import '../widgets/welcome/separator_text.dart';
+import 'home_screen.dart';
+import 'login_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -27,43 +28,47 @@ class WelcomeScreen extends StatelessWidget {
           ),
         ),
         child: SafeArea(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: kWelcomeLogoPaddingTop,
-                  bottom: kWelcomeLogoPaddingBottom,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: kWelcomeLogoPaddingTop,
+                    bottom: kWelcomeLogoPaddingBottom,
+                  ),
+                  child: LogoApplication(),
                 ),
-                child: LogoApplication(),
-              ),
-              Carousel(),
-              MainButton(
-                onTap: () => {Navigator.pushNamed(context, HomeScreen.routeName)},
-                label: 'Continuer sans compte',
-                color: 'dark',
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: kPaddingM,
-                  vertical: kPaddingXL,
+                Carousel(),
+                SizedBox(height: kSpacer * 4,),
+                MainButton(
+                  onTap: () => {Navigator.pushNamed(context, HomeScreen.routeName)},
+                  label: 'Continuer sans compte',
+                  color: 'dark',
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    MainButton(
-                      onTap: () => {Navigator.pushNamed(context, LoginScreen.routeName)},
-                      label: 'Se connecter',
-                      color: 'light',
-                    ),
-                    MainButton(
-                      onTap: () => {Navigator.pushNamed(context, RegisterScreen.routeName)},
-                      label: 'S’inscrire',
-                      color: 'light',
-                    ),
-                  ],
+                SeparatorText(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: kPaddingM,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      MainButton(
+                        onTap: () => {Navigator.pushNamed(context, LoginScreen.routeName)},
+                        label: 'Se connecter',
+                        color: 'light',
+                      ),
+                      SizedBox(width: kSpacer,),
+                      MainButton(
+                        onTap: () => {Navigator.pushNamed(context, RegisterScreen.routeName)},
+                        label: 'S’inscrire',
+                        color: 'light',
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
