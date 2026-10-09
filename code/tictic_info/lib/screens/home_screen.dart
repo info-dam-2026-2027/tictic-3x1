@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/my_drawer.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -16,60 +18,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(child: Text('Actions rapides')),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Réglages'),
-              onTap: () {
-                Navigator.of(context).pushNamed('/settings');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Réglages'),
-              onTap: () {
-                Navigator.of(context).pushNamed('/settings');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Réglages'),
-              onTap: () {
-                Navigator.of(context).pushNamed('/settings');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Réglages'),
-              onTap: () {
-                Navigator.of(context).pushNamed('/settings');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Réglages'),
-              onTap: () {
-                Navigator.of(context).pushNamed('/settings');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Réglages'),
-              onTap: () {
-                Navigator.of(context).pushNamed('/settings');
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: MyDrawer(),
       body: Column(
         children: [
-          TextButton(onPressed: () {
-            Scaffold.of(context).openDrawer();
-          }, child: Text('Ouvrir'))
+          TextButton(
+            onPressed: () {
+              scaffoldKey.currentState?.openDrawer();
+            },
+            child: Text('Ouvrir'),
+          ),
         ],
       ),
     );
