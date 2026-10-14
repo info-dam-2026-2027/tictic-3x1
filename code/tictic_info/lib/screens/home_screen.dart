@@ -104,6 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: kSpacer),
             Container(
+              height: 200,
               width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -112,31 +113,54 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.all(kPaddingXL),
-                child: Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: kWhite,
-                        borderRadius: BorderRadius.circular(kPaddingM),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(kPaddingM),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text('Total à payer', style: kHomeBoxText,),
-                            SizedBox(height: 4,),
-                            Text('80€', style: kHomeBoxNumber,)
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                padding: EdgeInsets.symmetric(vertical: kPaddingXL),
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _itemsTitle.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CardSlider(title: _itemsTitle[index], number: _itemsNumber[index]);
+                  },
                 ),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class CardSlider extends StatelessWidget {
+  final String title;
+  final String number;
+
+  const CardSlider({
+    super.key,
+    required this.title,
+    required this.number
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kPaddingM),
+      child: Container(
+        width: MediaQuery.of(context).size.width / 2.75,
+        height: 80,
+        decoration: BoxDecoration(
+          color: kWhite,
+          borderRadius: BorderRadius.circular(kPaddingM),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(kPaddingM),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(title, style: kHomeBoxText,),
+              SizedBox(height: 4,),
+              Text(number, style: kHomeBoxNumber,)
+            ],
+          ),
         ),
       ),
     );
