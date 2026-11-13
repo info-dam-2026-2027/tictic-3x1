@@ -1,3 +1,4 @@
+import 'package:dto/models/product.dart';
 import 'package:dto/models/recipe.dart';
 import 'package:firestore_odm/firestore_odm.dart';
 import 'models/user.dart';
@@ -12,6 +13,7 @@ class AppSchema extends FirestoreSchema {
 
 @Schema()
 @Collection<User>('users')
+@Collection<Product>('products')
 @Collection<Recipe>('users/*/recipes')
 @Collection<Recipe>('recipes')
 @Collection<Team>('teams')

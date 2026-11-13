@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tictic_info/routes/router.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: kDarkGreen),
       ),
       routes: router,
+      initialRoute: FirebaseAuth.instance.currentUser != null ? '/home' : '/' ,
     );
   }
 }

@@ -24,6 +24,23 @@ extension AppSchemaFirestoreODMExtension on FirestoreODM<AppSchema> {
                 UserAggregateBuilder(context: context),
           );
 
+  FirestoreCollection<AppSchema, Product, ProductPatchBuilder,
+          ProductFilterBuilder, ProductOrderByBuilder, ProductAggregateBuilder>
+      get products => FirestoreCollection(
+            ref: firestore.collection('products'),
+            toJson: (Product value) {
+              return ProductToJson(value) ?? const <String, dynamic>{};
+            },
+            fromJson: ProductFromJson,
+            documentIdField: 'id',
+            patchBuilderFactory: () => ProductPatchBuilder(),
+            filterBuilder: ProductFilterBuilder(),
+            orderByBuilderFunc: (context) =>
+                ProductOrderByBuilder(context: context),
+            aggregateBuilderFunc: (context) =>
+                ProductAggregateBuilder(context: context),
+          );
+
   FirestoreCollection<AppSchema, Recipe, RecipePatchBuilder,
           RecipeFilterBuilder, RecipeOrderByBuilder, RecipeAggregateBuilder>
       usersRecipes(String p1) => FirestoreCollection(
