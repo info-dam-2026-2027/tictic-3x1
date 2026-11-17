@@ -80,7 +80,7 @@ class _RegisterFormState extends State<RegisterForm> {
                       ).then((authResult) async {
                         String uid = authResult.user!.uid;
 
-                        await db.users.create(
+                        await db.users.set(
                           User(
                             id: uid,
                             firstName: firstName,
