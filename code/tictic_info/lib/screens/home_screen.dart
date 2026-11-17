@@ -27,11 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
   GlobalKey<ScaffoldState>();
 
   late final Stream<List<Product>> _productsStream;
+  late final Future<List<Product>> _productsFuture;
 
   @override
   void initState() {
     super.initState();
-    _productsStream = odm.products.stream;
+    _productsStream = odm.products.stream; // StreamBuilder
+    _productsFuture = odm.products.get(); // FutureBuilder
   }
 
   final _itemsTitle = [
@@ -177,6 +179,42 @@ class _HomeScreenState extends State<HomeScreen> {
 
               StreamBuilder<List<Product>>(
                 stream: _productsStream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return const Text('Erreur de chargement');
+                  }
+
+                  if (!snapshot.hasData) {
+                    return const CircularProgressIndicator();
+                  }
+
+                  final products = snapshot.data!;
+
+                  if (products.isEmpty) {
+                    return const Text('Aucun produit');
+                  }
+
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      final product = products[index];
+
+                      return ListTile(
+                        leading: const Icon(Icons.shopping_bag),
+                        title: Text(product.name),
+                        subtitle: Text(product.description),
+                        trailing: Text(
+                          '${(product.priceCents / 100).toStringAsFixed(2)} €',
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+              FutureBuilder<List<Product>>(
+                future: _productsFuture,
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return const Text('Erreur de chargement');

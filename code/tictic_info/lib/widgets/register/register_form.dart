@@ -77,12 +77,10 @@ class _RegisterFormState extends State<RegisterForm> {
                           .createUserWithEmailAndPassword(
                         email: email,
                         password: password,
-                      )
-                          .then((authResult) async {
+                      ).then((authResult) async {
                         String uid = authResult.user!.uid;
 
-                        await db.users
-                            .create(
+                        await db.users.create(
                           User(
                             id: uid,
                             firstName: firstName,

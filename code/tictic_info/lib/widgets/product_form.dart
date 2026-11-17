@@ -20,8 +20,7 @@ class _ProductFormState extends State<ProductForm> {
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _priceController = TextEditingController();
-  final _quantityController =
-  TextEditingController(text: '1');
+  final _quantityController = TextEditingController(text: '1');
 
   final odm = FirestoreODM(appSchema, firestore: FirebaseFirestore.instance);
 
@@ -59,9 +58,7 @@ class _ProductFormState extends State<ProductForm> {
         id: '',
         name: _nameController.text.trim(),
         description: _descriptionController.text.trim(),
-        priceCents: _priceToCents(
-          _priceController.text,
-        )!,
+        priceCents: _priceToCents(_priceController.text,)!,
         quantity: int.parse(_quantityController.text.trim()),
         createdAt: DateTime.now(),
       );
