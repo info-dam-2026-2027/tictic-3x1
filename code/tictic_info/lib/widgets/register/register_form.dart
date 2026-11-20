@@ -75,26 +75,28 @@ class _RegisterFormState extends State<RegisterForm> {
 
                       await FirebaseAuth.instance
                           .createUserWithEmailAndPassword(
-                        email: email,
-                        password: password,
-                      ).then((authResult) async {
-                        String uid = authResult.user!.uid;
+                            email: email,
+                            password: password,
+                          )
+                          .then((authResult) async {
+                            String uid = authResult.user!.uid;
 
-                        await db.users.set(
-                          User(
-                            id: uid,
-                            firstName: firstName,
-                            lastName: lastName,
-                            email: email
-                          ),
-                        )
-                            .then((onValue) async {
-                          Navigator.pushNamed(
-                            context,
-                            HomeScreen.routeName,
-                          );
-                        });
-                      });
+                            await db.users
+                                .create(
+                                  User(
+                                    id: uid,
+                                    firstName: firstName,
+                                    lastName: lastName,
+                                    email: email,
+                                  ),
+                                )
+                                .then((onValue) async {
+                                  Navigator.pushNamed(
+                                    context,
+                                    HomeScreen.routeName,
+                                  );
+                                });
+                          });
                     } on FirebaseAuthException catch (e) {
                       print("FirebaseAuthException: ${e.code}");
                     } catch (e) {

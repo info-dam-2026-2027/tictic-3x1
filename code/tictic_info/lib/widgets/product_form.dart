@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dto/models/product.dart';
 import 'package:dto/schema.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firestore_odm/firestore_odm.dart';
 import 'package:flutter/material.dart';
 import '../styles/colors.dart';
@@ -63,7 +64,7 @@ class _ProductFormState extends State<ProductForm> {
         createdAt: DateTime.now(),
       );
 
-      final productId = await odm.products.create(product);
+      final productId = await odm.usersProducts(FirebaseAuth.instance.currentUser!.uid).create(product);
 
       _formKey.currentState!.reset();
       _nameController.clear();
